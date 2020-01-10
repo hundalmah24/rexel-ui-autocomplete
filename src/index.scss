@@ -1,0 +1,469 @@
+@import url("https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap");
+:root {
+  --font-family: "PT Sans", sans-serif;
+  --white: #ffffff;
+  --forestGreen: #248733;
+  --white: #ffffff;
+  --nero: #2a2a2a;
+  --whiteSmoke: #ededed;
+  --lightGray: #d3d3d3;
+  --dimGray: #666666;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--whiteSmoke);
+}
+a {
+  text-decoration: none;
+}
+$colors: (
+  primary: var(--forestGreen),
+  secondary: var(--white),
+  dark: var(--nero),
+  light: var(--lightGray),
+  gray: var(--dimGray)
+);
+
+$sizes: (
+  0: 0,
+  4: 4,
+  8: 8,
+  12: 12,
+  16: 16,
+  20: 20,
+  24: 24,
+  28: 28,
+  32: 32,
+  36: 36,
+  40: 40,
+  44: 44
+);
+
+$mediaQueries: (
+  "mob-s": 320px,
+  "mob": 568px,
+  "tab": 768px,
+  "tab-lg": 1024px,
+  "laptop": 1366px,
+  "desktop": 1680px
+);
+$gap: 16px;
+$grids: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+.container {
+  padding-right: $gap;
+  padding-left: $gap;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -$gap;
+  margin-right: -$gap;
+}
+
+.col {
+  flex-basis: 100%;
+  padding-left: $gap;
+  padding-right: $gap;
+}
+
+.border-1 {
+  border-width: 1px;
+}
+
+/*------------------- grid and display classes ----------------*/
+
+@each $mediaName, $mediaValue in $mediaQueries {
+  @media (min-width: $mediaValue) {
+    @each $grid in $grids {
+      .col-#{$mediaName}-#{$grid} {
+        flex-basis: #{$grid / 16 * 100%};
+      }
+      .order-#{$mediaName}-#{$grid} {
+        order: $grid;
+      }
+      .move-left-#{$mediaName}-#{$grid} {
+        margin-left: #{$grid / 16 * 100%};
+      }
+    }
+    // --- display classes
+    .d-#{$mediaName}-none {
+      display: none;
+    }
+    .d-#{$mediaName}-flex {
+      display: flex;
+    }
+    .d-#{$mediaName}-inline-flex {
+      display: inline-flex;
+    }
+    // align classes
+    .align-items-#{$mediaName}-center {
+      align-items: center;
+    }
+    .align-items-#{$mediaName}-baseline {
+      align-items: baseline;
+    }
+
+    // --- flex direction
+    .flex-#{$mediaName}-column {
+      flex-direction: column;
+    }
+    .flex-#{$mediaName}-row {
+      flex-direction: row;
+    }
+
+    // border classes
+
+    .border-#{$mediaName}-1 {
+      border: 1px solid transparent;
+    }
+
+    .border-#{$mediaName}-none {
+      border-width: 0;
+    }
+    .border-#{$mediaName}-top-none {
+      border-top-width: 0;
+    }
+    .border-#{$mediaName}-bottom-none {
+      border-bottom-width: 0;
+    }
+
+    .border-#{$mediaName}-left-none {
+      border-left-width: 0;
+    }
+
+    .border-#{$mediaName}-right-none {
+      border-right-width: 0;
+    }
+
+    .border-x-#{$mediaName}-none {
+      border-left-width: 0;
+      border-right-width: 0;
+    }
+
+    .border-y-#{$mediaName}-none {
+      border-top-width: 0;
+      border-bottom-width: 0;
+    }
+
+    // justify classes
+    .justify-content-#{$mediaName}-center {
+      justify-content: center;
+    }
+    .justify-content-#{$mediaName}-space-between {
+      justify-content: space-between;
+    }
+    .justify-content-#{$mediaName}-space-around {
+      justify-content: space-around;
+    }
+  }
+}
+
+/*--------------------- padding ----------------*/
+
+@each $key, $value in $sizes {
+  .p-#{$key} {
+    padding: #{$value}px;
+  }
+  .pl-#{$key} {
+    padding-left: #{$value}px;
+  }
+  .pr-#{$key} {
+    padding-right: #{$value}px;
+  }
+  .px-#{$key} {
+    padding-left: #{$value}px;
+    padding-right: #{$value}px;
+  }
+  .py-#{$key} {
+    padding-top: #{$value}px;
+    padding-bottom: #{$value}px;
+  }
+  .pt-#{$key} {
+    padding-top: #{$value}px;
+  }
+  .pb-#{$key} {
+    padding-bottom: #{$value}px;
+  }
+  @each $mediaName, $mediaValue in $mediaQueries {
+    @media (min-width:#{$mediaValue}) {
+      .p-#{$mediaName}-#{$key} {
+        padding: #{$key}px;
+      }
+      .pl-#{$mediaName}-#{$key} {
+        padding-left: #{$key}px;
+      }
+      .pr-#{$mediaName}-#{$key} {
+        padding-right: #{$key}px;
+      }
+      .pt-#{$mediaName}-#{$key} {
+        padding-top: #{$key}px;
+      }
+      .pb-#{$mediaName}-#{$key} {
+        padding-bottom: #{$key}px;
+      }
+      .px-#{$mediaName}-#{$key} {
+        padding-left: #{$key}px;
+        padding-right: #{$key}px;
+      }
+      .py-#{$mediaName}-#{$key} {
+        padding-bottom: #{$key}px;
+        padding-top: #{$key}px;
+      }
+    }
+  }
+}
+
+@media (min-width: map-get($mediaQueries,"tab")) {
+  .p-tab-100 {
+    padding: 100px;
+  }
+}
+/*------------- margins ----------------*/
+
+@each $key, $value in $sizes {
+  .m-#{$key} {
+    margin: #{$value}px;
+  }
+  .ml-#{$key} {
+    margin-left: #{$value}px;
+  }
+  .mr-#{$key} {
+    margin-right: #{$value}px;
+  }
+  .mx-#{$key} {
+    margin-left: #{$value}px;
+    margin-right: #{$value}px;
+  }
+  .my-#{$key} {
+    margin-top: #{$value}px;
+    margin-bottom: #{$value}px;
+  }
+  @each $mediaName, $mediaValue in $mediaQueries {
+    @media (min-width:#{$mediaValue}) {
+      .m-#{$mediaName}-#{$key} {
+        margin: #{$key}px;
+      }
+      .mt-#{$mediaName}-#{$key} {
+        margin-top: #{$key}px;
+      }
+      .mb-#{$mediaName}-#{$key} {
+        margin-bottom: #{$key}px;
+      }
+      .ml-#{$mediaName}-#{$key} {
+        margin-left: #{$key}px;
+      }
+      .mr-#{$mediaName}-#{$key} {
+        margin-right: #{$key}px;
+      }
+      .mx-#{$mediaName}-#{$key} {
+        margin-left: #{$key}px;
+        margin-right: #{$key}px;
+      }
+      .my-#{$mediaName}-#{$key} {
+        margin-bottom: #{$key}px;
+        margin-top: #{$key}px;
+      }
+      .mx-n-#{$mediaName}-#{$key} {
+        margin-left: #{-$key}px;
+        margin-right: #{-$key}px;
+      }
+      .my-n-#{$mediaName}-#{$key} {
+        margin-bottom: #{-$key}px;
+        margin-top: #{-$key}px;
+      }
+    }
+  }
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+.mr-auto {
+  margin-right: auto;
+}
+.mx-auto {
+  @extend .ml-auto;
+  @extend .mr-auto;
+}
+
+/*--------------------- Fonts ----------------*/
+.font-large {
+  font-size: calc(16px * 1.125);
+}
+.font-weight-normal {
+  font-weight: 400;
+}
+.font-weight-bold {
+  font-weight: 600;
+}
+
+.bg-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-size-auto {
+  background-size: auto;
+}
+
+/*--------------------- text-classes ----------------*/
+.text-center {
+  text-align: center;
+}
+
+/*--------------------- width and heights ----------------*/
+.w-100 {
+  width: 100%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.border-box {
+  box-sizing: border-box;
+}
+// ----------------- image-100% -----------
+.responsive {
+  max-width: 100%;
+}
+/*--------------------- form elements ----------------*/
+.input-group {
+  input {
+    border: 0;
+    &:focus {
+      box-shadow: none;
+      outline: 0;
+    }
+  }
+  &.icon-right {
+    position: relative;
+    input {
+      padding-right: 40px;
+    }
+    .group-icon {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 16px;
+      margin: auto;
+      background-color: transparent;
+      z-index: 1;
+      border: 0;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+    }
+  }
+}
+
+// positions
+.pos-relative {
+  position: relative;
+}
+.pos-absolute {
+  position: absolute;
+}
+.top-100 {
+  top: 100%;
+}
+.left-0 {
+  left: 0;
+}
+.right-0 {
+  right: 0;
+}
+// border-radius
+.border-radius-4 {
+  border-radius: 4px;
+}
+
+.border-radius-rounded {
+  border-radius: 5000px;
+}
+
+.shadow {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/*--------------------- flex utilities ----------------*/
+.flex-grow {
+  flex-grow: 1;
+}
+
+.flex-shrink {
+  flex-shrink: 1;
+}
+
+/*--------------------- colors and background colors ----------------*/
+@each $key, $value in $colors {
+  .bg-#{$key} {
+    background-color: $value;
+  }
+  .text-#{$key} {
+    color: $value;
+  }
+  .border-#{$key} {
+    border-color: $value;
+  }
+}
+
+/*
+1. Navigation
+*/
+.nav-menu {
+  padding-left: 0;
+  list-style-type: none;
+  display: inline-flex;
+}
+.nav-icon {
+  background-color: transparent;
+  border: 0;
+  height: 44px;
+  width: 44px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+}
+
+// 2. list
+.list {
+  @extend .pl-0;
+  list-style-type: none;
+}
+
+// 3. icon
+.icon {
+  height: 30px;
+  width: 30px;
+  justify-content: center;
+  align-items: center;
+  &-2x {
+    height: 60px;
+    width: 60px;
+  }
+}
+
+.app-banner {
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @media (min-width: map-get($mediaQueries,"mob-s")) {
+    background-size: 228%;
+  }
+  @media (min-width: map-get($mediaQueries,"tab")) {
+    background-size: cover;
+  }
+}
+
+.suggestions {
+  li {
+    cursor: pointer;
+    &:hover {
+      @extend .text-primary;
+    }
+  }
+}
